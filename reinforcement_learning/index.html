@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <meta name="author" content="MIT">
+  <link rel="shortcut icon" href="../img/favicon.ico">
+  <title>Reinforcement Learning Lab - MIT AlphaPilot</title>
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
+
+  <link rel="stylesheet" href="../css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../css/theme_extra.css" type="text/css" />
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css">
+  
+  <script>
+    // Current page data
+    var mkdocs_page_name = "Reinforcement Learning Lab";
+    var mkdocs_page_input_path = "reinforcement_learning.md";
+    var mkdocs_page_url = null;
+  </script>
+  
+  <script src="../js/jquery-2.1.1.min.js" defer></script>
+  <script src="../js/modernizr-2.8.3.min.js" defer></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/shell.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/python.min.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script> 
+  
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+      <div class="wy-side-nav-search">
+        <a href=".." class="icon icon-home"> MIT AlphaPilot</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+	<ul class="current">
+	  
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="..">MIT AlphaPilot</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../gate_detection/">Gate Detection Lab</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../imitation_learning/">Imitation Learning Lab</a>
+	    </li>
+          
+            <li class="toctree-l1 current">
+		
+    <a class="current" href="./">Reinforcement Learning Lab</a>
+    <ul class="subnav">
+            
+    <li class="toctree-l2"><a href="#reinforcement-learning-lab">Reinforcement Learning Lab</a></li>
+    
+        <ul>
+        
+            <li><a class="toctree-l3" href="#introduction">Introduction</a></li>
+        
+            <li><a class="toctree-l3" href="#a-review-of-reinforcement-learning">A review of Reinforcement Learning</a></li>
+        
+            <li><a class="toctree-l3" href="#gym-interface">Gym Interface</a></li>
+        
+            <li><a class="toctree-l3" href="#state-space-dimensionality-reduction">State-space Dimensionality Reduction</a></li>
+        
+            <li><a class="toctree-l3" href="#part-1-downloading-the-donkeycar-simulation-environment">Part 1: Downloading the DonkeyCar simulation environment</a></li>
+        
+            <li><a class="toctree-l3" href="#part-2-installing-deep-rl-python-dependencies">Part 2: Installing Deep RL python dependencies</a></li>
+        
+            <li><a class="toctree-l3" href="#part-3-training-a-policy-with-a-pre-trained-vae">Part 3: Training a policy with a pre-trained VAE</a></li>
+        
+            <li><a class="toctree-l3" href="#part-4-experimenting-with-deep-rl">Part 4: Experimenting with Deep RL</a></li>
+        
+            <li><a class="toctree-l3" href="#part-5-retraining-the-vae">Part 5: Retraining the VAE</a></li>
+        
+        </ul>
+    
+
+    </ul>
+	    </li>
+          
+        </ul>
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="..">MIT AlphaPilot</a>
+      </nav>
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="..">Docs</a> &raquo;</li>
+    
+      
+    
+    <li>Reinforcement Learning Lab</li>
+    <li class="wy-breadcrumbs-aside">
+      
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main">
+            <div class="section">
+              
+                <h1 id="reinforcement-learning-lab">Reinforcement Learning Lab</h1>
+<h2 id="introduction">Introduction</h2>
+<p><strong>Objective:</strong> This lab exercise introduces <em>deep reinforcement learning</em> (Deep RL) for autonomous driving in simulation, using only a camera for sensing.</p>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/bWiFDPhTV4k" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+<p>Reinforcement learning is distinct from imitation learning: here, the robot learns to explore the environment on its own, with practically no prior information about the world or itself. Through exploration and reinforcement of behaviors which net reward, rather than human-provided examples of behavior to imitate, a robot has the potential to learn novel, optimal techniques which exceed the abilities of humans. Atari games, Go, and StarCraft are a few well-known settings in which Deep RL algorithms have approached or surpassed human expertise.</p>
+<p>This lab relies on providing the robot with a simulation environment to use as a sandbox for exploration. In particular, we will use a Unity-based simulation environment originally developed by <a href="https://github.com/tawnkramer/">Tawn Kramer</a> for the <a href="https://www.donkeycar.com/">DonkeyCar RC platform</a>.</p>
+<p>This lab exercise relies on a Deep RL demonstration by <a href="https://github.com/araffin">Antonin Raffin</a>, which uses <a href="https://spinningup.openai.com/en/latest/algorithms/ppo.html"><em>Proximal Policy Optimization (PPO)</em></a> and <a href="https://spinningup.openai.com/en/latest/algorithms/sac.html"><em>Soft Actor-Critic (SAC)</em></a> to quickly train the simulated DonkeyCar to drive on a randomly generated track (and also leverages a variational autoencoder based on code from <a href="http://blog.otoro.net//2018/06/09/world-models-experiments/">hardmaru</a>). This demonstration is itself a fork of an earlier repository by <a href="https://github.com/r7vme">Roma Sokolkov</a>, which leveraged another Deep RL algorithm <a href="https://spinningup.openai.com/en/latest/algorithms/ddpg.html"><em>Deep Deterministic Policy Gradient</em></a> (DDPG) in the simulator.</p>
+<p>It is instructive to review <a href="https://medium.com/@araffin/learning-to-drive-smoothly-in-minutes-450a7cdb35f4">Antonin Raffin's blogpost</a> regarding the testing he conducted, for ideas and background, as you work on the lab.</p>
+<p>For the lab exercise we have forked Antonin Raffin's repository in case there are any lab-specific changes to distribute, but the lab fork is otherwise simply tracking the upstream repo by the original authors (Raffin, Sokolov, Kramer, and <a href="https://github.com/mmaz/learning-to-drive-in-5-minutes#credits">other contributors/sources</a>):</p>
+<h3 id="cloning-the-lab-locally">Cloning the lab locally:</h3>
+<pre><code class="shell">$ git clone https://github.com/mmaz/learning-to-drive-in-5-minutes
+</code></pre>
+
+<h2 id="a-review-of-reinforcement-learning">A review of Reinforcement Learning</h2>
+<p>If needed, OpenAI's <a href="https://spinningup.openai.com/en/latest/spinningup/rl_intro.html">Spinning Up in Deep RL</a> is an excellent way to review in greater depth the concepts discussed during lecture. In particular, the lab is based on topics covered in these sections:</p>
+<ul>
+<li><a href="https://spinningup.openai.com/en/latest/spinningup/rl_intro.html">Basic concepts in RL</a></li>
+<li><a href="https://spinningup.openai.com/en/latest/spinningup/rl_intro3.html">The derivation of policy gradients</a></li>
+<li><a href="https://spinningup.openai.com/en/latest/algorithms/vpg.html">The "vanilla PG" algorithm</a></li>
+<li><a href="https://spinningup.openai.com/en/latest/algorithms/ppo.html">Proximal Policy Optimization (PPO)</a> </li>
+<li><a href="https://spinningup.openai.com/en/latest/algorithms/sac.html">Soft Actor-Critic (SAC)</a></li>
+</ul>
+<h2 id="gym-interface">Gym Interface</h2>
+<p>"Gym" interfaces refer to a de facto-standard for reinforcement learning in simulation, popularized by <a href="https://gym.openai.com/">OpenAI's Gym environment</a>. Simulation environments frequently support variants of the following two calls:</p>
+<ul>
+<li><code>reset()</code></li>
+<li><code>step()</code></li>
+</ul>
+<p>Calls to <code>step()</code> usually take in actions and return the next state, observed reward (if any), and auxillary information such as whether the episode is over (allowing the RL algorithm time to make decisions and optionally <code>reset()</code> the environment for the next episode). For a more in-depth explanation on the concepts in a Gym API, read <a href="http://gym.openai.com/docs/">http://gym.openai.com/docs/</a>.</p>
+<h2 id="state-space-dimensionality-reduction">State-space Dimensionality Reduction</h2>
+<p>A <strong>variational autoencoder</strong> or VAE is used to reduce the size of the state space that the policy must consider at training and inference time. The state space is represented as a small vector of floating point numbers (e.g., 20-30) taken from the VAE's bottleneck encoding (i.e., the "latent space" encoding), instead of the full image.</p>
+<p><a href="https://www.youtube.com/watch?v=uaaqyVS9-rM">This lecture</a> from Prof. Ali Ghodsi at the University of Waterloo is an excellent, brief, and self-contained introduction to the theory and implementation of VAEs. For additional reading, please consult one or more of these references (or inquire during office hours/over Slack):</p>
+<ul>
+<li>Ali Ghodsi's lecture: <a href="https://www.youtube.com/watch?v=uaaqyVS9-rM">https://www.youtube.com/watch?v=uaaqyVS9-rM</a></li>
+<li><a href="https://jaan.io/what-is-variational-autoencoder-vae-tutorial/">https://jaan.io/what-is-variational-autoencoder-vae-tutorial/</a></li>
+<li><a href="https://www.tensorflow.org/alpha/tutorials/generative/cvae">https://www.tensorflow.org/alpha/tutorials/generative/cvae</a></li>
+<li><a href="https://blog.keras.io/building-autoencoders-in-keras.html">https://blog.keras.io/building-autoencoders-in-keras.html</a></li>
+<li>Fast-forward Labs blog <a href="https://blog.fastforwardlabs.com/2016/08/12/introducing-variational-autoencoders-in-prose-and.html">Part 1</a> and <a href="https://blog.fastforwardlabs.com/2016/08/22/under-the-hood-of-the-variational-autoencoder-in.html">Part 2</a></li>
+<li><a href="https://github.com/hardmaru">hardmaru</a>'s series of posts on world models: <a href="http://blog.otoro.net//2018/06/09/world-models-experiments/">http://blog.otoro.net//2018/06/09/world-models-experiments/</a></li>
+</ul>
+<h2 id="part-1-downloading-the-donkeycar-simulation-environment">Part 1: Downloading the DonkeyCar simulation environment</h2>
+<p>The following link is a Linux build of the Unity Donkey simulation environment from the original author: </p>
+<p><a href="https://drive.google.com/open?id=1h2VfpGHlZetL5RAPZ79bhDRkvlfuB4Wb">Download on Google Drive</a></p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The simulation can also be built from source for other platforms, from <a href="https://github.com/tawnkramer/sdsandbox/tree/donkey">the <code>donkey</code> tree of the <code>sdsandbox</code> repo</a> using the <a href="https://unity.com/">Unity</a> development platform.</p>
+</div>
+<h3 id="starting-the-simulator">Starting the simulator</h3>
+<p>After unzipping the folder and changing into the directory, launch the simulator with:</p>
+<pre><code>$ ./build_sdsandbox.x86_64
+</code></pre>
+
+<p>I suggest the following settings of <code>640x480</code>, <code>windowed</code>, and <code>Fantastic</code> rendering quality (but this wll depend on your graphics support):</p>
+<p><img alt="" src="../img/dcsim.png" style="width:80%;" /></p>
+<h3 id="simulator-implementations-of-openai-gym-functions">Simulator implementations of OpenAI Gym functions:</h3>
+<p>The following links to the simulator's Gym API implementation are provided as reference for your experimentation (changing the implementation is not necessary however). Note that editing these implementations will not require rebuilidng the simulator, making experimentation easier to conduct.</p>
+<ul>
+<li><code>step()</code> is implemented through several callbacks:<ul>
+<li><a href="https://github.com/mmaz/learning-to-drive-in-5-minutes/blob/89a3b2ca040014cb2193ad3fe88636de146f49ce/donkey_gym/envs/donkey_sim.py#L185-L197"><code>take_action()</code></a></li>
+<li><a href="https://github.com/mmaz/learning-to-drive-in-5-minutes/blob/89a3b2ca040014cb2193ad3fe88636de146f49ce/donkey_gym/envs/donkey_sim.py#L219-L234"><code>calc_reward()</code></a> - note that this depends implicitly on the cross-track error reported by the simulator</li>
+<li><a href="https://github.com/mmaz/learning-to-drive-in-5-minutes/blob/89a3b2ca040014cb2193ad3fe88636de146f49ce/donkey_gym/envs/donkey_sim.py#L238-L280"><code>on_telemetry()</code></a> This recieves data from the simulator, including<ul>
+<li>front-bumper images from the simulated DonkeyCar</li>
+<li>current steering angle and velocity</li>
+<li>cross-track error ("cte")</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="https://github.com/mmaz/learning-to-drive-in-5-minutes/blob/89a3b2ca040014cb2193ad3fe88636de146f49ce/donkey_gym/envs/donkey_sim.py#L159-L177"><code>reset()</code></a> sets all counters to zero</li>
+<li><a href="https://github.com/mmaz/learning-to-drive-in-5-minutes/blob/89a3b2ca040014cb2193ad3fe88636de146f49ce/donkey_gym/envs/donkey_sim.py#L213-L217"><code>is_game_over()</code></a> is simply a combination of checking for collisions (not present in level 0) or crossing a threshhold of tolerated cross-track error</li>
+</ul>
+<h2 id="part-2-installing-deep-rl-python-dependencies">Part 2: Installing Deep RL python dependencies</h2>
+<div class="admonition danger">
+<p class="admonition-title">Heads up!</p>
+<p>If you are using an account on the NEET server, skip this step! These dependencies are already installed.</p>
+</div>
+<ul>
+<li>If you <strong>do not</strong> have a GPU on your computer:</li>
+</ul>
+<pre><code class="shell"># Use TensorFlow without a GPU
+$ conda env create -f environment.yml 
+</code></pre>
+
+<ul>
+<li>Otherwise, if you <strong>do</strong> have a GPU:</li>
+</ul>
+<pre><code class="shell"># Use TensorFlow with a GPU
+$ conda env create -f environment-gpu.yml
+</code></pre>
+
+<h2 id="part-3-training-a-policy-with-a-pre-trained-vae">Part 3: Training a policy with a pre-trained VAE</h2>
+<p>First, download <a href="https://drive.google.com/open?id=1n7FosFA0hALhuESf1j1yg-hERCnfVc4b">the pre-trained VAE from the author's Google Drive folder</a> for <em>Level 0</em> in the same directory you cloned the repository into.</p>
+<p>Next, launch the Unity environment (if it is not already running from <strong>Part 1</strong>)</p>
+<p>To launch a newly initialized training run for the PPO algorithm across 5000 iterations in <em>Level 0</em> of the simulator, run the following command:</p>
+<pre><code class="shell">$ python train.py --algo ppo -vae vae-level-0-dim-32.pkl -n 5000
+</code></pre>
+
+<p>Alternatively, to launch a training run for <em>Soft Actor-Critic</em> (SAC):</p>
+<pre><code class="shell">$ python train.py --algo sac -vae vae-level-0-dim-32.pkl -n 5000
+</code></pre>
+
+<p>For <em>Level 0</em>, the simulator will select a random track layout, and the Gym API will be used to reset the simulator using this track layout for each episode when training a new policy.</p>
+<table>
+<thead>
+<tr>
+<th>Example Track Layout 1</th>
+<th>Example Track Layout 2</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><img alt="" src="../img/random-track-1.png" /></td>
+<td><img alt="" src="../img/random-track-2.png" /></td>
+</tr>
+</tbody>
+</table>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/rolQ_wvX9O4" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+<div class="admonition note">
+<p class="admonition-title">Question</p>
+<p>In addition to accumulated reward, what metrics could be used for measuring a policy's performance? Are 5000 steps enough to train a good policy for PPO or SAC? Across different training runs (each starting from a randomly initialized policy), how frequently will PPO or SAC converge on a good policy, versus suffering from performance collapse?</p>
+</div>
+<h2 id="part-4-experimenting-with-deep-rl">Part 4: Experimenting with Deep RL</h2>
+<p>Once you have tried training a policy in the simulation environment, you can experiment with changing the existing algorithms, or try a different Deep RL algorithm altogether, such as <a href="http://spinningup.openai.com/en/latest/algorithms/trpo.html">TRPO</a>, <a href="http://spinningup.openai.com/en/latest/algorithms/td3.html">TD3</a>, etc.</p>
+<p>The goal of this section of the lab is to gain some intuition and experience with training the vehicle's policy using deep reinforcement learning, through modifying the existing code, hyperparameters, and algorithms, or by incorporating new algorithms. Your experimentation can target one or more threads of investigation (this is a non-exhaustive list):</p>
+<ul>
+<li>How can the training performance (accuracy/speed/etc) and learned policy's effectiveness be visualized or quantified?</li>
+<li>What is the effect of tuning hyperparameters on the convergence time and robustness (or lack thereof) of algorithms like PPO and SAC?</li>
+<li>What changes to the algorithm can be made to improve convergence behaviors and the robustness of the learned policy?</li>
+</ul>
+<p>Here are a few examples of possible things to try (again, non-exhaustive):</p>
+<ul>
+<li>Visualize the policy's training performance (e.g., with <a href="https://www.tensorflow.org/guide/summaries_and_tensorboard">tensorboard</a>)</li>
+<li>Visualize the value network's training performance (if you are using an actor-critic algorithm like PPO)</li>
+<li>Alter the hand-crafted <a href="https://github.com/mmaz/learning-to-drive-in-5-minutes/blob/89a3b2ca040014cb2193ad3fe88636de146f49ce/donkey_gym/envs/donkey_sim.py#L219-L234">reward function</a> by stating a hypothesis, changing the reward calculation, and retraining.<ul>
+<li>See <a href="https://medium.com/@araffin/learning-to-drive-smoothly-in-minutes-450a7cdb35f4">Antonin Raffin's blogpost</a> for his explanation of the current reward function</li>
+<li>An example hypothesis: perhaps the current implementation of the 'smooth' steering constraint is leading to frequent performance collapse - an alternative implementation may do better.</li>
+</ul>
+</li>
+<li>Quantify the variance of a trained policy<ul>
+<li>E.g., what is the distribution of collected reward across multiple trajectories using a trained policy? Can this be used to inform further training of the policy?</li>
+</ul>
+</li>
+<li>Change the network to use pixels directly instead of using the VAE encoding.<ul>
+<li>Suggestion: Consider using a CNN instead of a dense network, and explore augmentation/subsampling.</li>
+</ul>
+</li>
+<li>Train a policy that can drive on random roads (the simulator is currently set up to use the same road for every episode)</li>
+<li>Replace the pre-trained VAE with one you trained yourself on collected data in the simulator (this is the first component of <strong>Part 5</strong> below)</li>
+</ul>
+<h2 id="part-5-retraining-the-vae">Part 5: Retraining the VAE</h2>
+<p>You can sample from the pre-trained VAE's manifold with the following command:</p>
+<pre><code class="shell">$ python -m vae.enjoy_latent -vae vae-level-0-dim-32.pkl
+</code></pre>
+
+<p>You can move some of the sliders around and "generate" new views of the track by running the encoded representation through the deconvolutional portion of the VAE network.  </p>
+<p><img alt="" src="../img/vaeparams.png" style="width:40%;" /></p>
+<p>See the video below for an example output:</p>
+<video controls src="../img/vae.mp4"></video>
+
+<p>To get some hands-on experience with VAEs, collect a new set of images and train a new VAE, instead of using the pre-trained VAE. Optionally consider using a different network architecture (for instance, some recent VAE research has focused on improved disentangling of latent factors, such as <a href="https://www.ibm.com/blogs/research/2018/05/disentanglement-deep-learning/">this IBM paper</a> among others).</p>
+<p>You can use the <a href="https://github.com/mmaz/learning-to-drive-in-5-minutes/blob/master/vae/train.py">VAE training script</a> and train on new data via:</p>
+<pre><code class="shell">$ python -m vae.train --n-epochs 50 --verbose 0 --z-size 64 -f path-to-record/folder/
+</code></pre>
+
+<p>where <code>z-size</code> specifies the number of latent factors in the bottleneck.</p>
+<p>Next, try to train a new VAE network on real-world data, e.g., using the camera images you collected in the <a href="../imitation_learning/">Imitation Learning Lab</a> from a classroom or the full Stata basement track. Visualize samples from the manifold of this VAE. </p>
+<div class="admonition note">
+<p class="admonition-title">Optional Exercise</p>
+<p>If you are feeling particularly eager and have the time, you could use this VAE to train the RACECAR in a classroom or even in Stata basement! You might want to set up a few extra Traxxas batteries to keep charging and swapping out, because this could take an hour or more of driving on-policy, physically resetting when the car gets near an obstacle or veers off course, retraining, and repeating.</p>
+</div>
+              
+            </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+      
+        <a href="../imitation_learning/" class="btn btn-neutral" title="Imitation Learning Lab"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+    
+      <p>MIT 2019</p>
+    
+  </div>
+
+  Built with <a href="http://www.mkdocs.org">MkDocs</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+      
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" style="cursor: pointer">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      
+      
+        <span><a href="../imitation_learning/" style="color: #fcfcfc;">&laquo; Previous</a></span>
+      
+      
+    </span>
+</div>
+    <script>var base_url = '..';</script>
+    <script src="../js/theme.js" defer></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML" defer></script>
+      <script src="../search/main.js" defer></script>
+
+</body>
+</html>

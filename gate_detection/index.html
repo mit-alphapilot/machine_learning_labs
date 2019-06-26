@@ -1,0 +1,599 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <meta name="author" content="MIT">
+  <link rel="shortcut icon" href="../img/favicon.ico">
+  <title>Gate Detection Lab - MIT AlphaPilot</title>
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
+
+  <link rel="stylesheet" href="../css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../css/theme_extra.css" type="text/css" />
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css">
+  
+  <script>
+    // Current page data
+    var mkdocs_page_name = "Gate Detection Lab";
+    var mkdocs_page_input_path = "gate_detection.md";
+    var mkdocs_page_url = null;
+  </script>
+  
+  <script src="../js/jquery-2.1.1.min.js" defer></script>
+  <script src="../js/modernizr-2.8.3.min.js" defer></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/shell.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/python.min.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script> 
+  
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+      <div class="wy-side-nav-search">
+        <a href=".." class="icon icon-home"> MIT AlphaPilot</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+	<ul class="current">
+	  
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="..">MIT AlphaPilot</a>
+	    </li>
+          
+            <li class="toctree-l1 current">
+		
+    <a class="current" href="./">Gate Detection Lab</a>
+    <ul class="subnav">
+            
+    <li class="toctree-l2"><a href="#gate-detection-lab">Gate Detection Lab</a></li>
+    
+        <ul>
+        
+            <li><a class="toctree-l3" href="#overview">Overview</a></li>
+        
+        </ul>
+    
+
+    <li class="toctree-l2"><a href="#part-1-racecar-model-x">Part 1: RACECAR Model-X</a></li>
+    
+        <ul>
+        
+            <li><a class="toctree-l3" href="#task-1-boot-up">Task 1: Boot Up</a></li>
+        
+            <li><a class="toctree-l3" href="#task-2-teleop-launch-files">Task 2: Teleop &amp; Launch Files</a></li>
+        
+            <li><a class="toctree-l3" href="#task-3-test-cameras">Task 3: Test Cameras</a></li>
+        
+            <li><a class="toctree-l3" href="#task-4-write-ros-node">Task 4: Write ROS Node</a></li>
+        
+        </ul>
+    
+
+    <li class="toctree-l2"><a href="#part-2-gate-detection">Part 2: Gate Detection</a></li>
+    
+        <ul>
+        
+            <li><a class="toctree-l3" href="#background-on-ml">Background on ML</a></li>
+        
+            <li><a class="toctree-l3" href="#topic-1-what-is-a-tensor">Topic 1: What is a Tensor?</a></li>
+        
+            <li><a class="toctree-l3" href="#topic-2-what-are-convolutions-and-their-uses">Topic 2: What are Convolutions and their Uses?</a></li>
+        
+            <li><a class="toctree-l3" href="#task-1-tensorflow-tutorials">Task 1: TensorFlow Tutorials</a></li>
+        
+            <li><a class="toctree-l3" href="#task-2-collecting-data">Task 2: Collecting Data</a></li>
+        
+            <li><a class="toctree-l3" href="#task-3-training-a-model">Task 3: Training a Model</a></li>
+        
+            <li><a class="toctree-l3" href="#task-4-testing-a-model">Task 4: Testing a Model</a></li>
+        
+            <li><a class="toctree-l3" href="#task-5-integrating-with-mx">Task 5: Integrating with MX</a></li>
+        
+        </ul>
+    
+
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../imitation_learning/">Imitation Learning Lab</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../reinforcement_learning/">Reinforcement Learning Lab</a>
+	    </li>
+          
+        </ul>
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="..">MIT AlphaPilot</a>
+      </nav>
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="..">Docs</a> &raquo;</li>
+    
+      
+    
+    <li>Gate Detection Lab</li>
+    <li class="wy-breadcrumbs-aside">
+      
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main">
+            <div class="section">
+              
+                <h1 id="gate-detection-lab">Gate Detection Lab</h1>
+<h3 id="overview">Overview</h3>
+<p>This lab is split into two parts. Part 1 will introduce you to the RACECAR
+Model-X, its software stack, and how it differs from the RACECARs you've been
+using throughout the semester. Part 2 will then have you implement simple deep
+learning approach to object detection on the car.</p>
+<!-- This is a new lab that we hope to refine and integrate into future offerings of
+RSS. Please ask any questions or share feedback on the
+[NEET RSS Slack Channel](https://neet-rss-2019.slack.com). -->
+
+<h1 id="part-1-racecar-model-x">Part 1: RACECAR Model-X</h1>
+<p>The RACECAR Model-X (MX) is quite different from the Model-T (MT) cars used
+throughout the semester. For instance:
+- <a href="https://developer.nvidia.com/embedded/buy/jetson-tx2-devkit">NVIDIA Jetson TX2</a>
+has been upgraded for the
+<a href="https://developer.nvidia.com/embedded/buy/jetson-agx-xavier-devkit">NVIDIA Xavier</a>
+(Model-T for TX2, Model-X for Xavier)
+- LiDAR (<a href="https://www.robotshop.com/en/hokuyo-ust-10lx-scanning-laser-rangefinder.html">Hokuyo</a>
+or
+<a href="https://velodynelidar.com/vlp-16.html">Velodyne</a>) has been removed
+- <a href="https://www.logitechg.com/en-us/products/gamepads/f710-wireless-gamepad.html">Logitech F710 Joystick</a>
+has been switched for a wired
+<a href="https://www.xbox.com/en-US/xbox-one/accessories/controllers/xbox-black-wireless-controller">Xbox One Controller</a> (due to driver compatibility)
+- <a href="https://www.stereolabs.com/zed/">ZED Stereoscopic Camera</a>
+has been replaced with three
+<a href="https://www.logitech.com/en-us/product/hd-webcam-c310">Logitech C310 webcams</a>
+- <a href="https://www.sparkfun.com/products/14001">SparkFun IMU</a>
+has been removed
+- Chassis has been redesign to allow space for the taller Xavier dev board and
+the mounting of multiple webcams</p>
+<p>While the simplification of the onboard sensor suite may initially seem a step
+back for the platform, this is an intensional design decision. Unlike the MT
+cars, which prioritized LiDAR and sensor fusion solutions, the MX cars
+prioritize exclusively deep learning image based solutions.</p>
+<p>To this end, the removal of non-imaging sensors (LiDAR, IMU, etc.) and the
+upgrade to the NVIDIA Xavier makes sense. The Xavier is the most powerful
+embedded GPU board recently released by NVIDIA. Compared to the TX2s, the
+Xavier has significant preformance improvements accross the board.</p>
+<p><img alt="TX2/Xavier Benchmark" src="https://www.fastcompression.com/img/benchmarks/xavier-tx2-benchmarks_en_2018.jpg" /></p>
+<p><strong>Image Source: https://www.fastcompression.com/</strong></p>
+<p>Furthermore, the addition of three webcams allows you to get images from
+different viewpoints as inputs to your algorithms. This will be espeically
+valuable for later NEET labs.</p>
+<h3 id="task-1-boot-up">Task 1: Boot Up</h3>
+<p>Although familiar, booting up the MX car is slightly different than the MT.
+Specifically, the Xavier, battery, and WIFI credentials are slightly
+different.</p>
+<p>Start by connecting the barrel connector to the battery and pressing the
+power button once. <strong>Do not press the power button multiple times!</strong> The battery
+used on the MX cars has variable voltage. By default they power on at the
+correct voltage, 12V. Pressing the power button multiple times will cycle
+through other voltage settings and risk damaging equipments (particularly the
+router and USB hub that are only rated to run at 12V). The battery powers off
+automatically when components stop drawing power for a few minutes. Thus, when
+you are finished using the car, you shutdown the battery by simply removing the
+barrel connector from the battery, <strong>not by pressing the power button again.</strong>
+<strong>Do not press the power button multiple times!</strong></p>
+<p>Once the battery is plugged in, you should see the LEDs on the router and USB
+hub light up. Additionally, you can now boot the NVIDIA Xavier by pressing
+the left-most button on the back of the unit. After allowing approximately 1-2
+minutes for everything to boot up, you can start to connect to the car.</p>
+<p>The WIFI SSID for a given car should be <code>RACECAR_MX_#</code> where <code>#</code> is the number
+of your car (i.e. <code>0</code>, <code>1</code>, <code>2</code>, or <code>3</code>). Your car, Xavier, controller, battery,
+and router should all be labeled to help you determine your car number.
+The WIFI password should be the familiar <code>g0_fast!</code>. Once connected to the
+WIFI, you should be able to SSH to the car with the following command:</p>
+<pre><code>ssh racecar@192.168.0.20#
+</code></pre>
+
+<p>again where <code>#</code> is the number of your car. 
+Again, the password should be the familiar <code>racecar@mit</code>. Once connected to
+your car, you should notice a similar file structure to the MT car. One thing
+to note is the NVIDIA Xaviers exclusively run Ubuntu 18.04.  The TX2 you have
+been using on the MT cars are still using Ubuntu 16.04. While this should not
+matter for the labs, it is worth noting in case you try to install additional
+packages.</p>
+<h3 id="task-2-teleop-launch-files">Task 2: Teleop &amp; Launch Files</h3>
+<p>Once connected to your car, we will prepare to teleop the car for the first 
+time. Before doing this, make sure to connect your Traxxas battery to the
+VESC and give it sufficient time to boot up and connect to the Xavier as a
+serial device.</p>
+<p>Run the command:</p>
+<pre><code>teleop
+</code></pre>
+
+<p>Recall this is an alias defined in <code>~/.bashrc</code> for the more verbose command:</p>
+<pre><code>roslaunch racecar teleop.launch
+</code></pre>
+
+<p>What do you see? Does the car drive? Is anything wrong?</p>
+<p><img alt="teleop on fresh MX" src="../gates/images/missing-sensor-error.jpg" /></p>
+<p><strong>Screenshot of <code>teleop</code> running on a fresh MX car</strong></p>
+<p>Likely, you will observe the car teleops as expected, but your terminal is
+polluted with errors. This is because by default, the MX car is configured
+with the same software stack as the standard MT RACECAR. Like all things, this
+has both pros and cons. The pro here is this is identical code to what you have
+been using all semster (i.e. the code structure, rostopics, etc.). The con here
+is that the out-of-the-box defaults are not ideal for the MX car.</p>
+<p>Upon examining the error messages, you will notice they are in response to
+missing sensors. Specifically, the LiDAR and IMU (the ZED did run by default
+from <code>teleop</code>). Modify your launch files to a configuration that makes
+sense for the MX car. (Hint: This will just involve removing a few lines to
+not run drivers for missing sensors.)</p>
+<h3 id="task-3-test-cameras">Task 3: Test Cameras</h3>
+<p>Take a look at the simple Python file <code>~/webcams.py</code> in your home directory.
+What do you think it does? Does it run?</p>
+<p><img alt="Running webcams.py without -X" src="../gates/images/xforward-error.jpg" /></p>
+<p><strong>Screenshot of <code>python ~/webcams.py</code> without running ssh with a -X argument</strong></p>
+<p>Likely, the program does not run since there is a GUI component. Exit your
+ssh connection with the car and rejoin with the command</p>
+<pre><code>ssh -X racecar@192.168.0.20#
+</code></pre>
+
+<p>again where <code>#</code> is the number of your car.
+The -X argument enables X11 forwarding (i.e. allows you to render remote
+GUI components on your local machine). Try running the script again.
+Does it run now? Is there delay?</p>
+<p><img alt="Running webcams.py with -X" src="../gates/images/webcam-data.jpg" /></p>
+<p><strong>Screenshot of <code>python ~/webcams.py</code> while running ssh with a -X argument</strong></p>
+<p>You can expect to see delay in the frames. This is simply because you are
+streaming uncompressed images. The vehicle should be receiving these images
+on time. Are the cameras aligned accross the vertical dimenson? What happens
+if we remove the frame dimension restrictions in software? Why might this
+happen? Are the cameras displaying in the right order? </p>
+<p>Fix the camera ordering in software if needed.</p>
+<h3 id="task-4-write-ros-node">Task 4: Write ROS Node</h3>
+<p>Finally, we will write our very own ROS Node for our accessing these pictures
+within the ROS ecosystem. Using <code>~/webcams.py</code> as a starting point, modify the
+code to produce a useful rostopic interface. You will be using this interface
+for the rest of these NEET Labs. (Hint: Recall how the <code>/zed/</code> topics were
+structured. Would something similar work?)</p>
+<p>Once your ROS Node is complete and tested, put the file in a sensible place
+within the <code>~/racecar_ws</code> file hierarchy. Do <em>not</em> add it to your launch script.
+You will want to selectively run this script in the future.</p>
+<!-- ======================================================================= -->
+
+<h1 id="part-2-gate-detection">Part 2: Gate Detection</h1>
+<p>In this lab we will be creating a weakly-supervised deep learning system for
+detecting gates in TensorFlow. This lab is inspired by the methodology outline in a paper
+presented at CVPR 2015 called
+<a href="https://leon.bottou.org/publications/pdf/cvpr-2015.pdf">Is object localization for free? - Weakly-supervised learning with convolutional neural networks</a>
+If you find this material interested, we highly encourage you to read the
+original paper.</p>
+<h3 id="background-on-ml">Background on ML</h3>
+<p>The following <em>Topic Sections</em> will review some fundamental machine learning
+topics neccessary for this lab. There are no tasks in this section. If you are
+already familiar and comfortable with these topics, feel free to jump to the
+<em>Task Sections</em> and reference this information as needed. This background
+material is adapted from a previous lab offered in section of 6.a01.
+<a href="https://github.mit.edu/6a01-racecar/session2-lab2-object-localization-solutions">[Source]</a></p>
+<h3 id="topic-1-what-is-a-tensor">Topic 1: What is a Tensor?</h3>
+<p>Tensor is a term that gets thrown around a lot these days in the context of
+machine learning. For instance, TensorFlow, the machine learning library we will
+be using for the remainder of the NEET assignments, gets its namesake from this
+concept.</p>
+<p>Put simply, a <em>tensor</em> is just a generalization of vector, matrix, etc. A scaler
+is a 0-dimensional tensor, a vector is a 1-dimensional tensor, a matrix is a
+2-dimension tensor, etc.</p>
+<p>The <em>rank</em> of a tensor is simply how many dimensions the tensor has. Similarly,
+a scaler is rank 0, a vector is rank 1, a matrix is rank 2, etc.</p>
+<p>In this lab, the input to our neural network will be color images coming from
+the webcams in Part 1. Can you guess the rank and shape of the tensor
+representation? (Hint: the dimensions are ordered as
+<code>[height, width, channels]</code>).</p>
+<p><img alt="Color Channels" src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/33/Beyoglu_4671_tricolor.png/1200px-Beyoglu_4671_tricolor.png" /></p>
+<p><strong>There are many different color spaces used to represent digital photos. The
+most common is RGB.</strong></p>
+<p>If you said, <code>[240, 320, 3]</code>, you are absolutely correct! Keeping this
+straight is critical but also challenging (especially since some libraries
+alternate between wanting coordinates in <code>(x,y)</code> and other times in <code>(r,c)</code>.</p>
+<p>This is further complicated when you group multiple images into dataset. A group
+of these images is called a <em>batch</em>, has a rank of 4, and ordered dimensions of
+<code>[batch_size, height, width, channels]</code>.</p>
+<p>When you start constructing your own networks, you will notice many bugs boil
+down to mismatching the of the previous layer's output dimensionality to the
+next layer's input dimensionality. You can always check the dimensionality of
+a tensor by printing out the shape property in Python.</p>
+<pre><code class="Python">&gt;&gt;&gt; print(batch.shape)
+(6000,240,320,3)
+</code></pre>
+
+<h3 id="topic-2-what-are-convolutions-and-their-uses">Topic 2: What are Convolutions and their Uses?</h3>
+<p>A convolution is a mathematical operation with its roots in functional analysis.
+Although this is the same discrete operation found in probability, statistics,
+signal processing, etc., here you can primarily think of it as an operation that
+changes the shape of a tensor through a small number of learned weights.</p>
+<p>Visually, this can be interpreted as the following diagram:</p>
+<p><img alt="Convolution" src="https://raw.githubusercontent.com/iamaaditya/iamaaditya.github.io/master/images/conv_arithmetic/full_padding_no_strides_transposed.gif" /></p>
+<p><strong>The input image (bottom, blue) is undergoing a convolution to produce the
+output (top, teal). A small patch of learned weights is slid over every
+location. At each position, the weights are multiplied with the overlapping
+input image values and then all summed together to make a new single value
+pixel.</strong></p>
+<p>At a given location, this is governed by the equation:</p>
+<p><img alt="Convolution Equation" src="https://c1.staticflickr.com/5/4882/44346325620_750dc5ce6c_o.png" /></p>
+<p><strong>In the above gif, there are 9 weights (<code>w_1</code>, <code>w_2</code>, <code>w_3</code>, ... , <code>w_9</code>) and
+9 input values (<code>x_1</code>, <code>x_2</code>, <code>x_3</code>, ... , <code>x_9</code>). There is also a bias term,
+<code>b</code>, that you can disregard in this example since it is 0.</strong></p>
+<p>Althought the specific mathematical details are beyond the scope of this
+tutorial, a trained convolutional layer is useful because it learns to extract
+useful localized features from input data.</p>
+<p><img alt="Feature Extraction" src="https://i.stack.imgur.com/Hl2H6.png" /></p>
+<p><strong>The first convolutions (bottom layer) recognizes basic features like corners
+or lines. The next layer (middle layer) combine these features into primitive
+shapes such as eyes and ears. The last layer (top layer) combines these features
+into complete images such as faces. Layering convolutions is what builds this
+feature higherarchy and is what makes deep learning deep.</strong></p>
+<p>Additionally, in our use case we are interested in determining where an object
+is in an image. One useful feature of convolutions is that they do not act over
+the entire image, but on small subsections. Even after multiple convolutions,
+the top left pixel of the output image is only going to give us information
+about the top left patch of the input image.</p>
+<p>If we use convolutions for classification we are actually training a whole bunch
+of classifiers in parallel. Each pixel of the output will tell us whether an
+object is located in a particular portion of the image. We can then use this 
+heatmap to detect where our object of interest resides.</p>
+<p><img alt="Heatmap" src="https://www.di.ens.fr/willow/researchphotos/teaser_weakcnn.jpg" /></p>
+<p><strong>Warmer pixels indicate regions of the picture that strongly impacted the
+classification of the overal picture.</strong></p>
+<h3 id="task-1-tensorflow-tutorials">Task 1: TensorFlow Tutorials</h3>
+<p>Before jumping into using TensorFlow to detect gates, we will first complete
+a useful tutorial on TensorFlow. This is because, while an industry staple,
+TensorFlow can have a steep learning curve. This learning curve is well
+worth it due to TensorFlow's unmatched power and featureful ecosystem. Also,
+recent supplimental libraries, like Keras, have greatly reduced the complexity
+of common ML tasks.</p>
+<p>You may complete
+<a href="https://www.tensorflow.org/tutorials/keras/basic_classification">this tutorial</a>
+as a team or individually. The remainder of the NEET labs will build on this
+fundamental TensorFlow library knowledge, so make sure everyone understands the
+concepts individually if you choose to work as a group.</p>
+<p>When completing this tutorial you may run it locally on your personal laptop
+or remotely from your MX car. We suggest you work remotely on your car since
+TensorFlow is already installed there. If you want to work locally, you may
+follow the TensorFlow installation instructions
+<a href="https://www.tensorflow.org/install">here</a>.</p>
+<p>To best mimic the tutorial and the MX, we recommend you complete the tutorial
+using Python3 (TensorFlow on the Xavier currently only works with Python3).
+Additionally, we recommend you complete the tutorial in a
+<a href="https://jupyter.org/">Jupyter Notebook</a>
+, a handy interactive Python workspace served through a web brower.</p>
+<p>To configure the Jupyter Notebook server on your MX RACECAR, complete the
+following steps:</p>
+<ol>
+<li>After running SSH to access your MX car, confirm the necessary libraries
+are installed/install them with:</li>
+</ol>
+<pre><code>sudo apt install jupyter-notebook
+sudo apt install python3-matplotlib
+</code></pre>
+
+<ol>
+<li>Generate a default server configuration file with the following command:</li>
+</ol>
+<pre><code>jupyter notebook --generate-config
+</code></pre>
+
+<ol>
+<li>Edit the generated default config file,
+<code>/home/racecar/.jupyter/jupyter_notebook_config.py</code>,
+for remote access by uncommenting the following variables and modifying their
+values:</li>
+</ol>
+<pre><code class="Python">c.NotebookApp.allow_remote_access = False
+c.NotebookApp.ip = '192.168.0.20X' # where X is the number of your car
+c.NotebookApp.open_browser = False
+c.NotebookApp.port = 9999
+</code></pre>
+
+<p><strong>Make sure you edit the IP address to include your car's number when modifying
+the config file.</strong></p>
+<p>If you are interested in further configuring the server, including setting
+a permanent password, check out the documentation
+<a href="https://jupyter-notebook.readthedocs.io/en/stable/public_server.html">here</a>.</p>
+<ol>
+<li>Navigate to a working directory of your choice, perhaps <code>~/tf-tutorial</code> and
+start the server with the command:</li>
+</ol>
+<pre><code>jupyter-notebook
+</code></pre>
+
+<ol>
+<li>Among the server console output will URL of the form:</li>
+</ol>
+<pre><code>http://192.168.0.200:9999/?token=55db505149ca8e1efd2293455fd0ad97a3220e1e084c881a
+</code></pre>
+
+<p>While connected to the car's router, copy this URL into a web browser on your
+local machine. You should see a web page similar to the picture below.</p>
+<p><img alt="Jupyter Notebook" src="../gates/images/jupyter.jpg" /></p>
+<p><strong>Note: In the future, if you want to use Jupyter Notebooks on your car again,
+you should only have to repeat steps 4 and 5.</strong></p>
+<h3 id="task-2-collecting-data">Task 2: Collecting Data</h3>
+<p>Now that you are familiar with the basics of TensorFlow, it is time to start
+building your own gate detection solution. As you may have already began to
+realize, machine learning can only ever be as good as the data you collect.
+Thus, in this phase, we're going to get some practice collecting data.</p>
+<p>Luckily, this is a relatively simple machine learning task so you will not
+need to collect too much data. Additionally, since this solution is weakly
+supervised, you will only need to have data labeled as "contains gate" and
+"does not contain gate" -- no bounding boxes required.</p>
+<p>For reference, a TA solution was completed with 4800 320x240 pictures from
+the front camera only:
+<em> 2000 training images containing gates
+</em> 2000 training images not containing gates
+<em> 200 verification images containing gates
+</em> 200 verification images not containing gates</p>
+<p>Data was collected at 10 frames/sec, meaning the whole data collect took
+approximately 8 minutes. You are welcomed and encouraged to modify these
+quantities, use the side cameras, etc. Just know if you are spending hours
+collecting data, something is wrong and you should reach out to us on Slack.</p>
+<p><img alt="Example Gate Image" src="../gates/images/gate.png" /></p>
+<p><strong>Example gate image from collected dataset.</strong></p>
+<p>To collect data, feel free to modify the simple script 
+<a href="https://github.com/mit-alphapilot/gate_detection_lab/blob/master/record.py"><code>record.py</code></a>
+included in this repository. Materials for the gates will be left in the
+cage. Contact a TA if you need access.</p>
+<p>Additionally, you can examine specific image files collected with the handy tool
+Eye of GNOME (or <code>eog</code> for short). You can use the tool like this:</p>
+<pre><code>eog [FILENAME]
+</code></pre>
+
+<p>You can also cycle through images in that directory with the arrow keys and 
+delete individual images with the Delete key. Since this is a GUI tool, make
+sure you are running your ssh session with the <code>-X</code> argument.</p>
+<h3 id="task-3-training-a-model">Task 3: Training a Model</h3>
+<p>We will start by creating a simple gate classifier. This network will be
+trained on the data you collected and output a binary classification -- 0 for
+no gate, 1 for gate.</p>
+<p>To get started, open up and read through the code in <code>Train.ipynb</code>. You will
+notice much of this code is reminiscent, and in fact adapted from, the tutorial
+you completed on the MNIST dataset.</p>
+<p>There are two primary modifications you must make to this file:
+1. Modify the helper function <code>load_data()</code> to properly load the data you
+collected.
+2. Construct a neural network within the <code># build model structure</code> block. Try
+a handful of Conv2D layers and end with a handful of Dense layers. Mix a few
+AveragePooling2D and Flatten layers in between. Most important is to
+experement. If you're stuck, try implementing Lenet (pictured below) and modify
+it from there. Which is preforming best on your validation data?</p>
+<p><img alt="Lenet" src="../gates/images/lenet.jpg" /></p>
+<p>For reference, you should shoot for 95% or more accuracy on your training set
+and 80% or more accuracy on your validation set.</p>
+<p><img alt="Training/Testing Results" src="../gates/images/training-results.jpg" /></p>
+<p>The final step of this notebook saves your trained model for use in the next
+task.</p>
+<h3 id="task-4-testing-a-model">Task 4: Testing a Model</h3>
+<p>Now that we have a trained model, we will use it on data taken directly from
+the webcam and produce a heatmap. To do this, use <code>Heatmap.ipynb</code>. If your
+model from the previous task worked properly, you can expect to:
+1. Correctly classify the picture you take with the webcam as <code>gate</code> or
+<code>no_gate</code>
+2. In a photo of a gate, generate a heatmap that highlights the gate or critical
+features of the gate. (Note: Although portions may be highlighted in pictures
+without a gate as long as the entire image is correctly classified as <code>no_gate</code>
+you will disregard these heatmaps.)</p>
+<p><img alt="Gate" src="../gates/images/gates.png" /></p>
+<p><img alt="Heatmap" src="../gates/images/heatmaps.png" /></p>
+<p>Once you have your heatmap, implement a way to generate a steering angle from
+the heatmap. Consider methods that have you find the center of the high
+activate regions. Prototype it in the Jupyter Notebook before we integrate it
+with ROS in the next Task.</p>
+<h3 id="task-5-integrating-with-mx">Task 5: Integrating with MX</h3>
+<p>This step is, unfortunantely, slightly more complicated than ideal due to
+compatibility issues. Specifically, the Xavier will only run TensorFlow in
+Python3 while ROS will only run in Python2. As a result, we need to circumvent
+this by having a network connection between a session of Python3 and Python2.</p>
+<p>Although the exact architecture is up to you, we recommend having the Python3
+as a server responsible for producing steering angles and Python2 as a client
+responsible for turning a steering angle into a ROS message. With this method,
+you will copy a bulk of your code from the Jupyter Notebook into your server
+script (ideally a <code>.py</code> file, not another <code>.ipynb</code> Jupyter Notebook). With this
+architecture, the server will include code that connects to the webcam, fetchs
+a picture, runs it through TensorFlow, produces a heatmap, analyzes the heatmap
+to produce a steering angle, and, when queried by a client, responds with the
+current steering angle.</p>
+<p>To handle the networking, we recommend using ZMQ. You can checkout some
+documentation
+<a href="http://zguide.zeromq.org/py:all">here</a>.</p>
+<p>We've also included a sample server and client program in this repo,
+originating from the ZMQ documentation.
+<em> <a href="https://github.com/mit-alphapilot/gate_detection_lab/blob/master/hwclient.py"><code>hwserver.py</code></a>
+</em> <a href="https://github.com/mit-alphapilot/gate_detection_lab/blob/master/hwserver.py"><code>hwclient.py</code></a></p>
+<p>Additionally,
+<a href="https://pyzmq.readthedocs.io/en/latest/serialization.html">this documentation</a>
+shows how to easily define two functions <code>send_array()</code> and <code>recv_array()</code>
+transfer a <code>np.array</code> between two programs.</p>
+<p><strong>Note: ZMQ uses a REQ/REP (request/respond)
+<a href="https://en.wikipedia.org/wiki/Lockstep_protocol">Lockstep Protocol</a>
+to send messages. For using this library, just make sure each program
+alternates between sending/receving messages. Otherwise, if you try to
+send or receive two messages in a row, you'll get an error about the
+context not being valid.</strong></p>
+              
+            </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../imitation_learning/" class="btn btn-neutral float-right" title="Imitation Learning Lab">Next <span class="icon icon-circle-arrow-right"></span></a>
+      
+      
+        <a href=".." class="btn btn-neutral" title="MIT AlphaPilot"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+    
+      <p>MIT 2019</p>
+    
+  </div>
+
+  Built with <a href="http://www.mkdocs.org">MkDocs</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+      
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" style="cursor: pointer">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      
+      
+        <span><a href=".." style="color: #fcfcfc;">&laquo; Previous</a></span>
+      
+      
+        <span style="margin-left: 15px"><a href="../imitation_learning/" style="color: #fcfcfc">Next &raquo;</a></span>
+      
+    </span>
+</div>
+    <script>var base_url = '..';</script>
+    <script src="../js/theme.js" defer></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML" defer></script>
+      <script src="../search/main.js" defer></script>
+
+</body>
+</html>
