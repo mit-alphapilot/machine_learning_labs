@@ -32,9 +32,6 @@ This lab and the CNN architecture we will use are based on PilotNet from Nvidia:
 
 ## Part 1: Install required Python libraries and the simulation environment
 
-!!! danger "Heads up!"
-    If you are using an account on the NEET server, skip this step! These dependencies are already installed.
-
 ### `TensorFlow,` a deep-learning framework
 
 You first need to install [miniconda](https://conda.io/miniconda.html) to install TensorFlow. Download the `Python 3.7` version of miniconda and follow the installation instructions for your platform.
@@ -46,7 +43,7 @@ You first need to install [miniconda](https://conda.io/miniconda.html) to instal
 Once you have installed miniconda, clone the following repository locally:
 
 ```shell
-$ git clone https://github.com/mmaz/imitation_learning_lab
+$ git clone https://github.com/mit-alphapilot/imitation_learning_lab
 $ cd imitation_learning_lab/
 ```
 
@@ -182,7 +179,7 @@ $ conda activate imitation_learning
 (imitation_learning) $ jupyter notebook
 ```
 
-Then, open [train_RACECAR_pilotnet.ipynb](https://github.com/mmaz/imitation_learning_lab/blob/master/train_RACECAR_pilotnet.ipynb) in your browser.
+Then, open [train_RACECAR_pilotnet.ipynb](https://github.com/mit-alphapilot/imitation_learning_lab/blob/master/train_RACECAR_pilotnet.ipynb) in your browser.
 
 ### In Simulation
 
@@ -435,7 +432,7 @@ And here is a third-person view of a car autonomously driving around the same pa
 
 The following script will record images from the three webcams on the RACECAR along with the joystick-commanded steering angle (through `teleop`):
 
-<https://github.com/mmaz/imitation_learning_lab/blob/master/record_RACECAR.py>
+<https://github.com/mit-alphapilot/imitation_learning_lab/blob/master/record_RACECAR.py>
 
 ```shell
 $ python2 record_RACECAR.py
@@ -451,7 +448,7 @@ When you are done collecting data, press `ctrl-c` to terminate collection:
 
 Note that **before recording any data** you will need to change the **Video Device IDs** to the appropriate values, depending on which order the webcams were plugged in and registered by Linux.
 
-Set the appropriate values for your car in [`camera_RACECAR.py`](https://github.com/mmaz/imitation_learning_lab/blob/6dd9a61f2c687888de80afe94c2df139490828cd/cameras_RACECAR.py#L3-L5)
+Set the appropriate values for your car in [`camera_RACECAR.py`](https://github.com/mit-alphapilot/imitation_learning_lab/blob/6dd9a61f2c687888de80afe94c2df139490828cd/cameras_RACECAR.py#L3-L5)
 
 ```python
 class Video:
@@ -461,7 +458,7 @@ class Video:
     RIGHT = 0
 ```
 
-[The following script](https://github.com/mmaz/imitation_learning_lab/blob/master/video_id_RACECAR.py) will display the currently assigned video device IDs on top of the camera feeds, to help verify the IDs are in the correct order:
+[The following script](https://github.com/mit-alphapilot/imitation_learning_lab/blob/master/video_id_RACECAR.py) will display the currently assigned video device IDs on top of the camera feeds, to help verify the IDs are in the correct order:
 
 
 ```
@@ -474,24 +471,24 @@ $ python3 video_id_RACECAR.py
 
 Sidenote: you can also set `udev` rules to "freeze" these values for your car, if you frequently find the IDs changing after power-cycling the RACECAR.
 
-After you have collected your training data, transfer the data using `scp` or a flashdrive to your laptop and train your model using [the provided jupyter notebook](https://github.com/mmaz/imitation_learning_lab/blob/master/train_RACECAR_pilotnet.ipynb).
+After you have collected your training data, transfer the data using `scp` or a flashdrive to your laptop and train your model using [the provided jupyter notebook](https://github.com/mit-alphapilot/imitation_learning_lab/blob/master/train_RACECAR_pilotnet.ipynb).
 
 !!! warning "Reminder"
-    You should not train a model on the RACECAR - use the course server or your own laptop!
+    You should not train a model on the RACECAR
 
 ## Part 5: Running inference on RACECAR
 
 To execute a trained model, you will need to run the following scripts:
 
-<https://github.com/mmaz/imitation_learning_lab/blob/master/infer_RACECAR.py>
-<https://github.com/mmaz/imitation_learning_lab/blob/master/drive_RACECAR.py>
+<https://github.com/mit-alphapilot/imitation_learning_lab/blob/master/infer_RACECAR.py>
+<https://github.com/mit-alphapilot/imitation_learning_lab/blob/master/drive_RACECAR.py>
 
 !!! note
     We use `zmq` to send steering angle messages from our Python3 script running inference with TensorFlow, over to a Python2-ROS script that commands the car to drive.
 
-You will first need to copy your saved model weights to the RACECAR (e.g., using SCP). You will specify the model location using [this command-line argument](https://github.com/mmaz/imitation_learning_lab/blob/6dd9a61f2c687888de80afe94c2df139490828cd/infer_RACECAR.py#L27).
+You will first need to copy your saved model weights to the RACECAR (e.g., using SCP). You will specify the model location using [this command-line argument](https://github.com/mit-alphapilot/imitation_learning_lab/blob/6dd9a61f2c687888de80afe94c2df139490828cd/infer_RACECAR.py#L27).
 
-Next, if it has changed (due to a reboot or unplugging the cameras), remember [to **modify the video ID** to the center camera here](https://github.com/mmaz/imitation_learning_lab/blob/6dd9a61f2c687888de80afe94c2df139490828cd/cameras_RACECAR.py#L3-L5), or verify the current ID is correct using [`video_id_RACECAR.py`](https://github.com/mmaz/imitation_learning_lab/blob/master/video_id_RACECAR.py):
+Next, if it has changed (due to a reboot or unplugging the cameras), remember [to **modify the video ID** to the center camera here](https://github.com/mit-alphapilot/imitation_learning_lab/blob/6dd9a61f2c687888de80afe94c2df139490828cd/cameras_RACECAR.py#L3-L5), or verify the current ID is correct using [`video_id_RACECAR.py`](https://github.com/mit-alphapilot/imitation_learning_lab/blob/master/video_id_RACECAR.py):
 
 ```python
 class Video:
@@ -520,7 +517,7 @@ $ python2 drive_RACECAR.py
     This script also includes a mean filter. You can remove this, extend or shorten the length of the mean filter, change it to a median filter, etc, to experiment with inference behavior while driving.
 
 
-[visualize_drive.ipynb](https://github.com/mmaz/imitation_learning_lab/blob/master/visualize_drive.ipynb) can be used to overlay steering angle predictions on top of saved runs (see `infer_RACECAR.py` for a flag that saves images during inference):
+[visualize_drive.ipynb](https://github.com/mit-alphapilot/imitation_learning_lab/blob/master/visualize_drive.ipynb) can be used to overlay steering angle predictions on top of saved runs (see `infer_RACECAR.py` for a flag that saves images during inference):
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/o0I6_YiL0X4" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
@@ -528,7 +525,7 @@ $ python2 drive_RACECAR.py
 
 If you are having diffuclty training a working model, here are some suggestions:
 
-1. Visualize your model's predictions by saving the center camera images when you are testing a model (you can use the [`SAVE_RUN`](https://github.com/mmaz/imitation_learning_lab/blob/2ebcd9140e34ca2e2283496a84ea4e47c8979788/infer_RACECAR.py#L21) flag) and incorporate some of the code snippets from [visualize_drive.ipynb](https://github.com/mmaz/imitation_learning_lab/blob/master/visualize_drive.ipynb). 
+1. Visualize your model's predictions by saving the center camera images when you are testing a model (you can use the [`SAVE_RUN`](https://github.com/mit-alphapilot/imitation_learning_lab/blob/2ebcd9140e34ca2e2283496a84ea4e47c8979788/infer_RACECAR.py#L21) flag) and incorporate some of the code snippets from [visualize_drive.ipynb](https://github.com/mit-alphapilot/imitation_learning_lab/blob/master/visualize_drive.ipynb). 
     * Are the model outputs noisy (i.e., are the predicted angles jumping around a lot)? Try using the mean or median filter in `infer_RACECAR.py`. 
     * Are the inference angles wrong? Find some images in your training data that come from a similar point in the track where your inferred angles are wrong - how do the model's predictions look there on the training data? If they are also bad, you can try to collect more data in that spot on the track (for instance, you can reset the car to the starting position of a corner several times and record several turns).
     * In addition to visualizing the model's predictions on that section of the track in your training data, also inspect the images and steering angles in the CSV at that point in the track - maybe the car was not being driven smoothly at that location when collecting training data.
@@ -538,12 +535,12 @@ If you are having diffuclty training a working model, here are some suggestions:
     * The number of distinct, unique visual features at each point in the track (i.e., higher input resolutions and larger crops of each frame will include more details from the walls, ceiling, and floor) used when training the model will impact how well the model can memorize the correct steering output to predict at that point in the track during inference, but this will require more training time and data. Smaller inputs can help make the model more robust and generalizable, and reduce the amount of training time. 
 1. Make sure you can train a model that works on a smaller environment (e.g., around a couple of tables or around a classroom) before tackling the full Stata basement loop. 
 1. Remember: the training and validation errors are not a great indicator of how well the model wll drive, compared to testing model variants on the car. They are a better indicator of whether the model is continuing to fit (i.e., "learn").
-1. Be wary of overfitting: try multiple saved checkpoints instead of just the last one (a checkpoint is saved every epoch). You can shorten the number of training steps per epoch and increase the number of epochs to have more models to try out. You can try a larger batch size on the server too. 
+1. Be wary of overfitting: try multiple saved checkpoints instead of just the last one (a checkpoint is saved every epoch). You can shorten the number of training steps per epoch and increase the number of epochs to have more models to try out. You can also try a larger batch size. 
 1. Try to plan multiple training experiments ahead of time. Instead of changing one hyperparameter, training a model and testing, and going back to change another hyperparameter, try to train several models with different hyperparameters in one session and copy them all over to your racecar.
-    * Moreover, if you are using the [`SAVE_RUN`](https://github.com/mmaz/imitation_learning_lab/blob/2ebcd9140e34ca2e2283496a84ea4e47c8979788/infer_RACECAR.py#L21) flag, you can try visualizing predictions from all your model variants on the same saved run - you might find another trained model or saved epoch is doing better than the one you were using for testing.
+    * Moreover, if you are using the [`SAVE_RUN`](https://github.com/mit-alphapilot/imitation_learning_lab/blob/2ebcd9140e34ca2e2283496a84ea4e47c8979788/infer_RACECAR.py#L21) flag, you can try visualizing predictions from all your model variants on the same saved run - you might find another trained model or saved epoch is doing better than the one you were using for testing.
 1. You can try adding more model regularization (e.g., more dropout or batchnorm layers) to avoid overfitting. You might also try to decrease the learning rate (you will need to train for longer) - if the learning rate is too high, the model will coverge too quickly. You might also choose to experiment with different activation types (ReLU, ELU, Tanh, ...) since they have different characteristics with respect to backprop.
-1. Try training on only the center camera and see if that model performs better. If it does perform better, you might have a poor value selected for your [`OFFSET_STEERING_ANGLE`](https://github.com/mmaz/imitation_learning_lab/blob/2ebcd9140e34ca2e2283496a84ea4e47c8979788/pilotnet.py#L13) - it may either be too small or too large, depending on your camera's positioning. Some manually-driven tests may help you to find a better value (every car handles a bit differently). 
-1. Try significantly increasing the amount of overlap between the three cameras. Make sure they are all level with each other if you re-position the cameras. You will need to unaffix and retape your cameras down while looking at the camera stream (using x-forwarding over ssh). Though this might reduce the chances of your car recovering if it makes a bad turn, it will effectively triple the amount of data you are collecting along the nominal path. If you do this, remember to reduce your [`OFFSET_STEERING_ANGLE`](https://github.com/mmaz/imitation_learning_lab/blob/2ebcd9140e34ca2e2283496a84ea4e47c8979788/pilotnet.py#L13) value.
-1. With x-forwarding to view the live camera stream, or when copying training data from the RACECAR to your laptop or the server, connecting to the car's router via Ethernet will probably be faster than connecting over WiFi. If you do need to stream or copy data over WiFi, try to use the 5GHz network which will probably be faster.
+1. Try training on only the center camera and see if that model performs better. If it does perform better, you might have a poor value selected for your [`OFFSET_STEERING_ANGLE`](https://github.com/mit-alphapilot/imitation_learning_lab/blob/2ebcd9140e34ca2e2283496a84ea4e47c8979788/pilotnet.py#L13) - it may either be too small or too large, depending on your camera's positioning. Some manually-driven tests may help you to find a better value (every car handles a bit differently). 
+1. Try significantly increasing the amount of overlap between the three cameras. Make sure they are all level with each other if you re-position the cameras. You will need to unaffix and retape your cameras down while looking at the camera stream (using x-forwarding over ssh). Though this might reduce the chances of your car recovering if it makes a bad turn, it will effectively triple the amount of data you are collecting along the nominal path. If you do this, remember to reduce your [`OFFSET_STEERING_ANGLE`](https://github.com/mit-alphapilot/imitation_learning_lab/blob/2ebcd9140e34ca2e2283496a84ea4e47c8979788/pilotnet.py#L13) value.
+1. With x-forwarding to view the live camera stream, or when copying training data from the RACECAR to your laptop or a server, connecting to the car's router via Ethernet will probably be faster than connecting over WiFi. If you do need to stream or copy data over WiFi, try to use the 5GHz network which will probably be faster.
 1. Read [Nvidia's PilotNet paper](https://arxiv.org/pdf/1704.07911.pdf) and papers which have cited it (e.g., via Google Scholar) for many more ideas (often in methodology sections, and future work discussions).
 1. One powerful regularization/generalization technique for training neural networks is [multi-task learning](https://en.wikipedia.org/wiki/Multi-task_learning). A crude version of this approach might be to add a second output to the network which predicts velocities (also present in your CSV). It is optional whether you choose to command the model's predicted velocities or continue to command a fixed speed (the current behavior of `drive_RACECAR.py`) when running inference - the benefits to model regularization may still be gained from this change. However, this will likely require more training data.
