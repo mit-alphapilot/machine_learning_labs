@@ -139,9 +139,9 @@
 <p>This lab relies on providing the robot with a simulation environment to use as a sandbox for exploration. In particular, we will use a Unity-based simulation environment originally developed by <a href="https://github.com/tawnkramer/">Tawn Kramer</a> for the <a href="https://www.donkeycar.com/">DonkeyCar RC platform</a>.</p>
 <p>This lab exercise relies on a Deep RL demonstration by <a href="https://github.com/araffin">Antonin Raffin</a>, which uses <a href="https://spinningup.openai.com/en/latest/algorithms/ppo.html"><em>Proximal Policy Optimization (PPO)</em></a> and <a href="https://spinningup.openai.com/en/latest/algorithms/sac.html"><em>Soft Actor-Critic (SAC)</em></a> to quickly train the simulated DonkeyCar to drive on a randomly generated track (and also leverages a variational autoencoder based on code from <a href="http://blog.otoro.net//2018/06/09/world-models-experiments/">hardmaru</a>). This demonstration is itself a fork of an earlier repository by <a href="https://github.com/r7vme">Roma Sokolkov</a>, which leveraged another Deep RL algorithm <a href="https://spinningup.openai.com/en/latest/algorithms/ddpg.html"><em>Deep Deterministic Policy Gradient</em></a> (DDPG) in the simulator.</p>
 <p>It is instructive to review <a href="https://medium.com/@araffin/learning-to-drive-smoothly-in-minutes-450a7cdb35f4">Antonin Raffin's blogpost</a> regarding the testing he conducted, for ideas and background, as you work on the lab.</p>
-<p>For the lab exercise we have forked Antonin Raffin's repository in case there are any lab-specific changes to distribute, but the lab fork is otherwise simply tracking the upstream repo by the original authors (Raffin, Sokolov, Kramer, and <a href="https://github.com/mmaz/learning-to-drive-in-5-minutes#credits">other contributors/sources</a>):</p>
+<p>For the lab exercise we have forked Antonin Raffin's repository in case there are any lab-specific changes to distribute, but the lab fork is otherwise simply tracking the upstream repo by the original authors (Raffin, Sokolov, Kramer, and <a href="https://github.com/mit-alphapilot/learning-to-drive-in-5-minutes#credits">other contributors/sources</a>):</p>
 <h3 id="cloning-the-lab-locally">Cloning the lab locally:</h3>
-<pre><code class="shell">$ git clone https://github.com/mmaz/learning-to-drive-in-5-minutes
+<pre><code class="shell">$ git clone https://github.com/mit-alphapilot/learning-to-drive-in-5-minutes
 </code></pre>
 
 <h2 id="a-review-of-reinforcement-learning">A review of Reinforcement Learning</h2>
@@ -189,9 +189,9 @@
 <p>The following links to the simulator's Gym API implementation are provided as reference for your experimentation (changing the implementation is not necessary however). Note that editing these implementations will not require rebuilidng the simulator, making experimentation easier to conduct.</p>
 <ul>
 <li><code>step()</code> is implemented through several callbacks:<ul>
-<li><a href="https://github.com/mmaz/learning-to-drive-in-5-minutes/blob/89a3b2ca040014cb2193ad3fe88636de146f49ce/donkey_gym/envs/donkey_sim.py#L185-L197"><code>take_action()</code></a></li>
-<li><a href="https://github.com/mmaz/learning-to-drive-in-5-minutes/blob/89a3b2ca040014cb2193ad3fe88636de146f49ce/donkey_gym/envs/donkey_sim.py#L219-L234"><code>calc_reward()</code></a> - note that this depends implicitly on the cross-track error reported by the simulator</li>
-<li><a href="https://github.com/mmaz/learning-to-drive-in-5-minutes/blob/89a3b2ca040014cb2193ad3fe88636de146f49ce/donkey_gym/envs/donkey_sim.py#L238-L280"><code>on_telemetry()</code></a> This recieves data from the simulator, including<ul>
+<li><a href="https://github.com/mit-alphapilot/learning-to-drive-in-5-minutes/blob/89a3b2ca040014cb2193ad3fe88636de146f49ce/donkey_gym/envs/donkey_sim.py#L185-L197"><code>take_action()</code></a></li>
+<li><a href="https://github.com/mit-alphapilot/learning-to-drive-in-5-minutes/blob/89a3b2ca040014cb2193ad3fe88636de146f49ce/donkey_gym/envs/donkey_sim.py#L219-L234"><code>calc_reward()</code></a> - note that this depends implicitly on the cross-track error reported by the simulator</li>
+<li><a href="https://github.com/mit-alphapilot/learning-to-drive-in-5-minutes/blob/89a3b2ca040014cb2193ad3fe88636de146f49ce/donkey_gym/envs/donkey_sim.py#L238-L280"><code>on_telemetry()</code></a> This recieves data from the simulator, including<ul>
 <li>front-bumper images from the simulated DonkeyCar</li>
 <li>current steering angle and velocity</li>
 <li>cross-track error ("cte")</li>
@@ -199,14 +199,10 @@
 </li>
 </ul>
 </li>
-<li><a href="https://github.com/mmaz/learning-to-drive-in-5-minutes/blob/89a3b2ca040014cb2193ad3fe88636de146f49ce/donkey_gym/envs/donkey_sim.py#L159-L177"><code>reset()</code></a> sets all counters to zero</li>
-<li><a href="https://github.com/mmaz/learning-to-drive-in-5-minutes/blob/89a3b2ca040014cb2193ad3fe88636de146f49ce/donkey_gym/envs/donkey_sim.py#L213-L217"><code>is_game_over()</code></a> is simply a combination of checking for collisions (not present in level 0) or crossing a threshhold of tolerated cross-track error</li>
+<li><a href="https://github.com/mit-alphapilot/learning-to-drive-in-5-minutes/blob/89a3b2ca040014cb2193ad3fe88636de146f49ce/donkey_gym/envs/donkey_sim.py#L159-L177"><code>reset()</code></a> sets all counters to zero</li>
+<li><a href="https://github.com/mit-alphapilot/learning-to-drive-in-5-minutes/blob/89a3b2ca040014cb2193ad3fe88636de146f49ce/donkey_gym/envs/donkey_sim.py#L213-L217"><code>is_game_over()</code></a> is simply a combination of checking for collisions (not present in level 0) or crossing a threshhold of tolerated cross-track error</li>
 </ul>
 <h2 id="part-2-installing-deep-rl-python-dependencies">Part 2: Installing Deep RL python dependencies</h2>
-<div class="admonition danger">
-<p class="admonition-title">Heads up!</p>
-<p>If you are using an account on the NEET server, skip this step! These dependencies are already installed.</p>
-</div>
 <ul>
 <li>If you <strong>do not</strong> have a GPU on your computer:</li>
 </ul>
@@ -265,7 +261,7 @@ $ conda env create -f environment-gpu.yml
 <ul>
 <li>Visualize the policy's training performance (e.g., with <a href="https://www.tensorflow.org/guide/summaries_and_tensorboard">tensorboard</a>)</li>
 <li>Visualize the value network's training performance (if you are using an actor-critic algorithm like PPO)</li>
-<li>Alter the hand-crafted <a href="https://github.com/mmaz/learning-to-drive-in-5-minutes/blob/89a3b2ca040014cb2193ad3fe88636de146f49ce/donkey_gym/envs/donkey_sim.py#L219-L234">reward function</a> by stating a hypothesis, changing the reward calculation, and retraining.<ul>
+<li>Alter the hand-crafted <a href="https://github.com/mit-alphapilot/learning-to-drive-in-5-minutes/blob/89a3b2ca040014cb2193ad3fe88636de146f49ce/donkey_gym/envs/donkey_sim.py#L219-L234">reward function</a> by stating a hypothesis, changing the reward calculation, and retraining.<ul>
 <li>See <a href="https://medium.com/@araffin/learning-to-drive-smoothly-in-minutes-450a7cdb35f4">Antonin Raffin's blogpost</a> for his explanation of the current reward function</li>
 <li>An example hypothesis: perhaps the current implementation of the 'smooth' steering constraint is leading to frequent performance collapse - an alternative implementation may do better.</li>
 </ul>
@@ -292,7 +288,7 @@ $ conda env create -f environment-gpu.yml
 <video controls src="../img/vae.mp4"></video>
 
 <p>To get some hands-on experience with VAEs, collect a new set of images and train a new VAE, instead of using the pre-trained VAE. Optionally consider using a different network architecture (for instance, some recent VAE research has focused on improved disentangling of latent factors, such as <a href="https://www.ibm.com/blogs/research/2018/05/disentanglement-deep-learning/">this IBM paper</a> among others).</p>
-<p>You can use the <a href="https://github.com/mmaz/learning-to-drive-in-5-minutes/blob/master/vae/train.py">VAE training script</a> and train on new data via:</p>
+<p>You can use the <a href="https://github.com/mit-alphapilot/learning-to-drive-in-5-minutes/blob/master/vae/train.py">VAE training script</a> and train on new data via:</p>
 <pre><code class="shell">$ python -m vae.train --n-epochs 50 --verbose 0 --z-size 64 -f path-to-record/folder/
 </code></pre>
 
