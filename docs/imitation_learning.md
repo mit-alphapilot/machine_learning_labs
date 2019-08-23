@@ -1,5 +1,7 @@
 # Imitation Learning Lab
 
+![](img/pilotnet_intro.png)
+
 ## Introduction
 
 This lab provides an introduction to **end-to-end imitation learning for vision-only navigation** of a racetrack. Let's break that down:
@@ -23,6 +25,8 @@ We will start by driving a simulated car around a virtual racetrack and collecti
 ### In Stata basement:
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/tQCZjKa3Bpw" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/SN7MkDwkLys" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 This lab and the CNN architecture we will use are based on PilotNet from Nvidia:
 
